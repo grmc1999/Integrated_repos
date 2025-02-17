@@ -29,7 +29,7 @@ def files_processing(files,output_format):
         summary = utils.generate_summary(client, content, prompt_instructions)
         output_file_name = file_name.rsplit(".", 1)[0] + "_summary"
         utils.save_summary(
-            os.path.join("..","output","{output_file_name}.{output_format}")
+            os.path.join("..","output","{output_file_name}.{output_format}"),
            # "../output/{output_file_name}.{output_format}",
         output_file_name, summary, format=output_format)
 
