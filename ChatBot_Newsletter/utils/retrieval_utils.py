@@ -10,7 +10,7 @@ import glob
 import os
 import re
 
-from utils import base_utils as bu
+from . import base_utils as bu
 
 
 def load_model(model_name):

@@ -1,7 +1,7 @@
 {
     "embeddings": {
       "model_name": "intfloat/multilingual-e5-large",
-      "output_dir": "embeddings"
+      "output_dir": "ChatBot_Newsletter/embeddings"
     },
     "retrieve": {
       "top_k": 5
