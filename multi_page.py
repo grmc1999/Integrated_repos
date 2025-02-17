@@ -28,7 +28,10 @@ def files_processing(files,output_format):
 
         summary = utils.generate_summary(client, content, prompt_instructions)
         output_file_name = file_name.rsplit(".", 1)[0] + "_summary"
-        utils.save_summary(output_folder, output_file_name, summary, format=output_format)
+        utils.save_summary(
+            os.path.join("..","output","{output_file_name}.{output_format}")
+           # "../output/{output_file_name}.{output_format}",
+        output_file_name, summary, format=output_format)
 
         print(f"Summary saved to: ../output/{output_file_name}.{output_format}")
         Summaries.update({
@@ -56,7 +59,7 @@ with gr.Blocks() as demo:
 #operation = gr.Radio([".pdf", ".docx"])
 iface = gr.Interface(fn=files_processing,
                      inputs=[gr.components.File(file_count="multiple", label=None),
-                     gr.Radio([".pdf", ".docx"]),
+                     gr.Radio([".txt", ".docx"]),
                      #gr.FileExplorer()
                      ],
                      outputs="text")
