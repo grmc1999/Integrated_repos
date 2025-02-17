@@ -3,40 +3,17 @@ import random
 import time
 from Authomatized_Summaries import utils
 from openai import OpenAI
-import openai
 from dotenv import load_dotenv
 import os
 
-load_dotenv()
-api_key = os.getenv("OPENAI_API_KEY")
-#openai.api_key = os.environ["OPENAI_API_KEY"]
+#load_dotenv()
+#api_key = os.getenv("OPENAI_API_KEY")
 
-client = OpenAI(api_key=api_key)
+#client = OpenAI(api_key=api_key)
 
 
 def files_processing(files,output_format):
-
-    news = utils.load_news_from_list(files)
-
-    prompt_instructions = utils.load_prompt(
-        os.path.join("Authomatized_Summaries","prompt.txt")
-        )
-
-    Summaries={}
-
-    for file_name, content in news:
-
-        summary = utils.generate_summary(client, content, prompt_instructions)
-        output_file_name = file_name.rsplit(".", 1)[0] + "_summary"
-        utils.save_summary(output_folder, output_file_name, summary, format=output_format)
-
-        print(f"Summary saved to: ../output/{output_file_name}.{output_format}")
-        Summaries.update({
-            file_name:output_file_name
-        })
-
-
-    return Summaries
+    return str(files)
 
 with gr.Blocks() as demo:
     name = gr.Textbox(label="Name")
