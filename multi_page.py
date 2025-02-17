@@ -59,7 +59,7 @@ with gr.Blocks() as demo:
 #operation = gr.Radio([".pdf", ".docx"])
 iface = gr.Interface(fn=files_processing,
                      inputs=[gr.components.File(file_count="multiple", label=None),
-                     gr.Radio([".txt", ".docx"]),
+                     gr.Radio(["txt", "docx"]),
                      #gr.FileExplorer()
                      ],
                      outputs="text")
