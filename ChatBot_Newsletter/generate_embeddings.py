@@ -1,9 +1,7 @@
 import os
 from utils import base_utils as bu
-from utils.retrieval_utils import (
-    load_model,
-    get_embeddings
-)
+from utils import retrieval_utils as ru
+
 
 def main():
     """
@@ -20,9 +18,9 @@ def main():
     splitter_type = config["splitter"]["type"]
     chunk_size = config["splitter"]["chunk_size"]
     chunk_overlap = config["splitter"]["chunk_overlap"]
-    retrieval_model = load_model(model_name)
+    retrieval_model = ru.load_model(model_name)
 
-    get_embeddings(
+    ru.get_embeddings(
         chunk_size=chunk_size,
         chunk_overlap=chunk_overlap,
         model_name=model_name,

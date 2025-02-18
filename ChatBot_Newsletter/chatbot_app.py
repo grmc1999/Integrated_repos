@@ -1,7 +1,8 @@
 import sys
 from utils import base_utils as bu
-from utils.retrieval_utils import load_embeddings, load_model, search_query
-from utils.generation_utils import generate_answer
+from utils import retrieval_utils as ru
+from utils import generation_utils as gu
+
 
 def main():
     """
@@ -10,7 +11,7 @@ def main():
     """
     config = bu.load_config("configs/config.json")
 
-    embeddings_data = load_embeddings(config["embeddings"]["output_dir"])
+    embeddings_data = ru.load_embeddings(config["embeddings"]["output_dir"])
     if not embeddings_data:
         print("No embeddings found. Please run generate_embeddings.py first.")
         sys.exit(1)
@@ -20,7 +21,7 @@ def main():
     segment_sources = embeddings_data.get("segment_sources", [])
     model_name = embeddings_data.get("model_name", "Unknown Model")
 
-    retrieval_model = load_model(model_name)
+    retrieval_model = ru.load_model(model_name)
 
     while True:
         user_query = input("\nDigite sua pergunta (ou 'sair' para encerrar): ")
@@ -29,7 +30,7 @@ def main():
             break
 
         top_k = config["retrieve"]["top_k"]
-        top_segments, top_similarities, top_sources = search_query(
+        top_segments, top_similarities, top_sources = ru.search_query(
             user_query,
             corpus_embeddings,
             retrieval_model,
@@ -44,7 +45,7 @@ def main():
             print(f"Segmento {i+1} (similaridade={score:.4f}) da fonte '{source}':\n{segment}\n")
 
         context = "\n".join(top_segments)
-        answer = generate_answer(user_query, context, config)
+        answer = gu.generate_answer(user_query, context, config)
 
         unique_references = set(top_sources)
         references_text = "\n".join(unique_references)
