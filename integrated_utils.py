@@ -43,14 +43,19 @@ def prep_response(message, history):
 
     context = "\n".join(top_segments)
     answer = gu.generate_answer(message, context, config)
-    unique_references = set(top_sources)
-    references_text = "\n".join(unique_references)
 
-    response_text = (
-        f"**Resposta do chatbot:**\n{answer}\n\n"
-        f"**Referências:**\n{references_text}"
-    )
+    if "Não possuo informações relevantes sobre este assunto" in answer:
+        response_text = f"**Resposta do chatbot:**\n{answer}"
+    else:
+        unique_references = set(top_sources)
+        references_text = "\n".join(unique_references)
+        response_text = (
+            f"**Resposta do chatbot:**\n{answer}\n\n"
+            f"**Referências:**\n{references_text}"
+        )
+
     return response_text
+
 
 def process_files_with_progress(files):
     """
