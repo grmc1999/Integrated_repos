@@ -79,6 +79,15 @@ body {
     border-radius: 10px;
     padding: 10px;
 }
+                 
+/* Título del Chatbot */
+#chatbot-title {
+    background-color: #0077b6;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+}
 """)
 
 with demo:
@@ -138,6 +147,9 @@ with demo:
         )
 
     with gr.Tab("💬 ChatBot"):
+        gr.Markdown(
+            elem_id="chatbot-title"
+        )
         chatbot = gr.ChatInterface(
             fn=iu.prep_response,
             type="messages",

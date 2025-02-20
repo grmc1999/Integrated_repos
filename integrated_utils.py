@@ -116,14 +116,14 @@ def download_summaries(summaries_dict, selected_format):
         for filename, summary in summaries_dict.items():
             base = os.path.splitext(filename)[0] + "_summary"
 
-            if selected_format == "txt":
+            if selected_format == "📄 txt":
                 output_file = f"{base}.txt"
                 full_out_path = os.path.join(tmp_dir, output_file)
                 with open(full_out_path, 'w', encoding='utf-8') as f:
                     f.write(f"{summary['title']}\n\n{summary['content']}\n")
                 zf.write(full_out_path, arcname=output_file)
 
-            elif selected_format == "docx":
+            elif selected_format == "📝 docx":
                 output_file = f"{base}.docx"
                 full_out_path = os.path.join(tmp_dir, output_file)
                 au.save_summary(
